@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File Organizer</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>File Organizer</h1>
+            <p>Organize your files automatically</p>
+        </header>
+        
+        <main>
+            <div class="upload-area">
+                <div class="upload-box">
+                    <p>Drop files here or click to select</p>
+                    <input type="file" id="fileInput" multiple>
+                </div>
+            </div>
+            
+            <div class="options">
+                <h3>Organization Options</h3>
+                <label>
+                    <input type="radio" name="sortType" value="type" checked>
+                    Sort by file type
+                </label>
+                <label>
+                    <input type="radio" name="sortType" value="date">
+                    Sort by date
+                </label>
+            </div>
+            
+            <button id="organizeBtn" class="btn-primary">Organize Files</button>
+        </main>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,16 @@
+{
+  "name": "file-organizer",
+  "version": "1.0.0",
+  "description": "A simple file organization tool",
+  "main": "index.html",
+  "scripts": {
+    "start": "python -m http.server 8000",
+    "dev": "python -m http.server 8000"
+  },
+  "keywords": ["file", "organizer", "utility", "desktop"],
+  "author": "navayaozi",
+  "license": "MIT",
+  "dependencies": {
+    "electron": "^22.0.0"
+  }
+}
