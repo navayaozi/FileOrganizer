@@ -87,3 +87,43 @@ header p {
 .btn-primary:hover {
     transform: translateY(-2px);
 }
+
+.results {
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: 2px solid #eee;
+}
+
+.results h3 {
+    color: #333;
+    margin-bottom: 1.5rem;
+}
+
+.category {
+    margin-bottom: 1.5rem;
+    background: #f8f9fa;
+    padding: 1rem;
+    border-radius: 8px;
+}
+
+.category h4 {
+    color: #667eea;
+    margin-bottom: 0.8rem;
+    font-size: 1.1rem;
+}
+
+.category ul {
+    list-style: none;
+    margin: 0;
+}
+
+.category li {
+    padding: 0.3rem 0;
+    color: #666;
+    font-size: 0.9rem;
+    border-bottom: 1px solid #eee;
+}
+
+.category li:last-child {
+    border-bottom: none;
+}
