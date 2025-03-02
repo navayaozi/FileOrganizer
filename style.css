@@ -127,3 +127,9 @@ header p {
 .category li:last-child {
     border-bottom: none;
 }
+
+.file-size {
+    color: #999;
+    font-size: 0.8rem;
+    float: right;
+}

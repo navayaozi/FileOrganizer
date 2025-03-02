@@ -106,7 +106,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 <ul>`;
             
             organized[category].forEach(file => {
-                resultHTML += `<li>${file.name}</li>`;
+                const fileSize = formatFileSize(file.size);
+                resultHTML += `<li>${file.name} <span class="file-size">(${fileSize})</span></li>`;
             });
             
             resultHTML += '</ul></div>';
@@ -115,5 +116,13 @@ document.addEventListener('DOMContentLoaded', function() {
         resultHTML += '</div>';
         
         document.querySelector('.container').innerHTML += resultHTML;
+    }
+
+    function formatFileSize(bytes) {
+        if (bytes === 0) return '0 B';
+        const k = 1024;
+        const sizes = ['B', 'KB', 'MB', 'GB'];
+        const i = Math.floor(Math.log(bytes) / Math.log(k));
+        return parseFloat((bytes / Math.pow(k, i)).toFixed(1)) + ' ' + sizes[i];
     }
 });
