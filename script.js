@@ -56,7 +56,13 @@ document.addEventListener('DOMContentLoaded', function() {
             return;
         }
 
-        const organized = {};
+        const detectDuplicates = document.getElementById('detectDuplicates').checked;
+        let organized = {};
+        let duplicates = [];
+        
+        if (detectDuplicates) {
+            duplicates = findDuplicates(selectedFiles);
+        }
         
         selectedFiles.forEach(file => {
             let category;
@@ -73,7 +79,11 @@ document.addEventListener('DOMContentLoaded', function() {
             organized[category].push(file);
         });
 
-        displayResults(organized);
+        if (detectDuplicates && duplicates.length > 0) {
+            organized['Duplicate Files'] = duplicates;
+        }
+
+        displayResults(organized, duplicates.length > 0);
     }
 
     function getFileCategory(filename) {
@@ -97,11 +107,18 @@ document.addEventListener('DOMContentLoaded', function() {
         return date.getFullYear() + '-' + String(date.getMonth() + 1).padStart(2, '0');
     }
 
-    function displayResults(organized) {
+    function displayResults(organized, hasDuplicates) {
         let resultHTML = '<div class="results"><h3>Organization Results:</h3>';
         
+        if (hasDuplicates) {
+            resultHTML += '<div class="duplicate-warning">⚠️ Duplicate files detected!</div>';
+        }
+        
         Object.keys(organized).forEach(category => {
-            resultHTML += `<div class="category">
+            const isDuplicateCategory = category === 'Duplicate Files';
+            const categoryClass = isDuplicateCategory ? 'category duplicate-category' : 'category';
+            
+            resultHTML += `<div class="${categoryClass}">
                 <h4>${category} (${organized[category].length} files)</h4>
                 <ul>`;
             
@@ -124,5 +141,21 @@ document.addEventListener('DOMContentLoaded', function() {
         const sizes = ['B', 'KB', 'MB', 'GB'];
         const i = Math.floor(Math.log(bytes) / Math.log(k));
         return parseFloat((bytes / Math.pow(k, i)).toFixed(1)) + ' ' + sizes[i];
+    }
+
+    function findDuplicates(files) {
+        const duplicates = [];
+        const seen = new Map();
+        
+        files.forEach(file => {
+            const key = `${file.name}-${file.size}`;
+            if (seen.has(key)) {
+                duplicates.push(file);
+            } else {
+                seen.set(key, file);
+            }
+        });
+        
+        return duplicates;
     }
 });

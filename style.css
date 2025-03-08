@@ -133,3 +133,23 @@ header p {
     font-size: 0.8rem;
     float: right;
 }
+
+.duplicate-warning {
+    background: #fff3cd;
+    border: 1px solid #ffeaa7;
+    color: #856404;
+    padding: 1rem;
+    border-radius: 6px;
+    margin-bottom: 1.5rem;
+    text-align: center;
+    font-weight: bold;
+}
+
+.duplicate-category {
+    background: #ffe6e6 !important;
+    border: 2px solid #ffb3b3;
+}
+
+.duplicate-category h4 {
+    color: #cc0000 !important;
+}
