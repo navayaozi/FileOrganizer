@@ -2,6 +2,8 @@ document.addEventListener('DOMContentLoaded', function() {
     const fileInput = document.getElementById('fileInput');
     const uploadBox = document.querySelector('.upload-box');
     const organizeBtn = document.getElementById('organizeBtn');
+    const previewBtn = document.getElementById('previewBtn');
+    const renameSection = document.querySelector('.rename-section');
     
     let selectedFiles = [];
 
@@ -39,8 +41,10 @@ document.addEventListener('DOMContentLoaded', function() {
         if (selectedFiles.length > 0) {
             uploadBox.innerHTML = `<p>${selectedFiles.length} files selected</p>`;
             organizeBtn.disabled = false;
+            renameSection.style.display = 'block';
         } else {
             uploadBox.innerHTML = `<p>Drop files here or click to select</p><input type="file" id="fileInput" multiple>`;
+            renameSection.style.display = 'none';
         }
     }
 
@@ -157,5 +161,93 @@ document.addEventListener('DOMContentLoaded', function() {
         });
         
         return duplicates;
+    }
+
+    // Rename functionality
+    document.querySelectorAll('input[name="renameType"]').forEach(radio => {
+        radio.addEventListener('change', function() {
+            const replaceInput = document.getElementById('replaceInput');
+            const renameInput = document.getElementById('renameInput');
+            
+            if (this.value === 'replace') {
+                replaceInput.style.display = 'block';
+                renameInput.placeholder = 'Find text...';
+            } else {
+                replaceInput.style.display = 'none';
+                renameInput.placeholder = this.value === 'prefix' ? 'Enter prefix...' : 'Enter suffix...';
+            }
+        });
+    });
+
+    previewBtn.addEventListener('click', function() {
+        const renameType = document.querySelector('input[name="renameType"]:checked').value;
+        const renameText = document.getElementById('renameInput').value.trim();
+        const replaceText = document.getElementById('replaceInput').value.trim();
+        
+        if (!renameText) {
+            alert('Please enter text for renaming');
+            return;
+        }
+        
+        const previewResults = generateRenamePreview(selectedFiles, renameType, renameText, replaceText);
+        displayRenamePreview(previewResults);
+    });
+
+    function generateRenamePreview(files, type, text, replaceText) {
+        return files.map(file => {
+            const nameParts = file.name.split('.');
+            const extension = nameParts.length > 1 ? '.' + nameParts.pop() : '';
+            const baseName = nameParts.join('.');
+            
+            let newName;
+            
+            switch (type) {
+                case 'prefix':
+                    newName = text + baseName + extension;
+                    break;
+                case 'suffix':
+                    newName = baseName + text + extension;
+                    break;
+                case 'replace':
+                    newName = baseName.replace(new RegExp(text, 'g'), replaceText) + extension;
+                    break;
+                default:
+                    newName = file.name;
+            }
+            
+            return {
+                original: file.name,
+                renamed: newName,
+                size: file.size
+            };
+        });
+    }
+
+    function displayRenamePreview(previewResults) {
+        let previewHTML = '<div class="rename-preview"><h3>Rename Preview:</h3>';
+        
+        previewHTML += '<div class="preview-table">';
+        previewHTML += '<div class="preview-header"><span>Original</span><span>New Name</span></div>';
+        
+        previewResults.forEach(result => {
+            const sizeText = formatFileSize(result.size);
+            previewHTML += `
+                <div class="preview-row">
+                    <span class="original-name">${result.original}</span>
+                    <span class="new-name">${result.renamed}</span>
+                    <span class="file-size">${sizeText}</span>
+                </div>
+            `;
+        });
+        
+        previewHTML += '</div></div>';
+        
+        // Remove existing preview if any
+        const existingPreview = document.querySelector('.rename-preview');
+        if (existingPreview) {
+            existingPreview.remove();
+        }
+        
+        document.querySelector('.container').innerHTML += previewHTML;
     }
 });

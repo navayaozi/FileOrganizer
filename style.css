@@ -153,3 +153,108 @@ header p {
 .duplicate-category h4 {
     color: #cc0000 !important;
 }
+
+.rename-section {
+    margin-top: 2rem;
+    padding: 1.5rem;
+    background: #f8f9fa;
+    border-radius: 8px;
+    border: 1px solid #e9ecef;
+}
+
+.rename-section h3 {
+    margin-bottom: 1rem;
+    color: #333;
+}
+
+.rename-options {
+    margin-bottom: 1rem;
+}
+
+.rename-options label {
+    display: inline-block;
+    margin-right: 1rem;
+    margin-bottom: 0.5rem;
+    cursor: pointer;
+}
+
+.rename-inputs {
+    margin-bottom: 1rem;
+}
+
+.rename-inputs input {
+    width: 100%;
+    padding: 0.8rem;
+    margin-bottom: 0.5rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 0.9rem;
+}
+
+.btn-secondary {
+    background: #6c757d;
+    color: white;
+    border: none;
+    padding: 0.8rem 1.5rem;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.btn-secondary:hover {
+    background: #5a6268;
+}
+
+.rename-preview {
+    margin-top: 2rem;
+    padding: 1.5rem;
+    background: #f8f9fa;
+    border-radius: 8px;
+    border: 1px solid #dee2e6;
+}
+
+.rename-preview h3 {
+    margin-bottom: 1rem;
+    color: #333;
+}
+
+.preview-table {
+    width: 100%;
+}
+
+.preview-header {
+    display: grid;
+    grid-template-columns: 1fr 1fr auto;
+    gap: 1rem;
+    padding: 0.8rem;
+    background: #e9ecef;
+    border-radius: 6px;
+    font-weight: bold;
+    color: #495057;
+    margin-bottom: 0.5rem;
+}
+
+.preview-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr auto;
+    gap: 1rem;
+    padding: 0.8rem;
+    border-bottom: 1px solid #dee2e6;
+    align-items: center;
+}
+
+.preview-row:last-child {
+    border-bottom: none;
+}
+
+.original-name {
+    color: #6c757d;
+    font-size: 0.9rem;
+}
+
+.new-name {
+    color: #28a745;
+    font-size: 0.9rem;
+    font-weight: 500;
+}

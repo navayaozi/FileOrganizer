@@ -38,6 +38,29 @@
             </div>
             
             <button id="organizeBtn" class="btn-primary">Organize Files</button>
+            
+            <div class="rename-section" style="display: none;">
+                <h3>Batch Rename</h3>
+                <div class="rename-options">
+                    <label>
+                        <input type="radio" name="renameType" value="prefix" checked>
+                        Add prefix
+                    </label>
+                    <label>
+                        <input type="radio" name="renameType" value="suffix">
+                        Add suffix
+                    </label>
+                    <label>
+                        <input type="radio" name="renameType" value="replace">
+                        Find & replace
+                    </label>
+                </div>
+                <div class="rename-inputs">
+                    <input type="text" id="renameInput" placeholder="Enter text...">
+                    <input type="text" id="replaceInput" placeholder="Replace with..." style="display: none;">
+                </div>
+                <button id="previewBtn" class="btn-secondary">Preview Changes</button>
+            </div>
         </main>
     </div>
     
